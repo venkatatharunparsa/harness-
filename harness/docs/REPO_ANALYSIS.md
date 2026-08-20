@@ -1,6 +1,6 @@
 # Repository Analysis: Constellation Team Harness (CTH)
 
-**Version:** 0.3  
+**Version:** 0.4  
 **Status:** Living document  
 **Owner:** Human lead  
 **Date:** 2026-08-20
@@ -119,3 +119,49 @@ OpenHands provides a production-quality agent platform with:
 
 ### 6. Decision
 - **Adopt** as primary graph engine. Build wrapper MCP for enrichment and risk/confidence additions. Pair with Serena for Flutter/Dart semantic safety.
+
+---
+
+## Analysis 3: Serena (Source-Verified)
+
+- **URL:** https://github.com/oraios/serena
+- **License:** MIT
+- **Primary language:** Python
+- **Maintainers / activity:** v1.7.0, very active, ~28.3k stars
+- **Status:** Adopt as precision semantic editing layer
+
+### 1. What the repo does well
+- LSP-backed exact symbol lookup, references, implementations, rename, symbol-body replacement, diagnostics.
+- Supports Python, TypeScript/JavaScript, Dart, and many other languages via SolidLSP.
+- Works as Cursor MCP server with `--context ide`.
+- Project memory and project activation.
+- Embeddable as a Python library (`SerenaAgent`).
+- MIT licensed.
+
+### 2. Specific ideas/workflows worth borrowing
+- **LSP-grade semantic editing:** Use before editing to find exact references and rename safely.
+- **Project memory:** Lightweight Markdown memories, but our Git-backed context remains source of truth.
+- **Project activation:** Use `--project <abs path>` for deterministic activation.
+- **Output control:** We must wrap Serena to cap/truncate outputs because it returns strings and can be large.
+
+### 3. Reusable components
+- Serena itself as MCP server. We integrate it as a separate MCP alongside `codebase-memory-mcp`, and our `team-workflow` MCP calls both.
+
+### 4. Limitations and risks
+- No persistent code graph or call-path/impact engine. It is not a graph DB.
+- Flutter support is Dart LS only; no widget/pubspec/codegen awareness.
+- Language server startup can hang or fail-fast; wrapper must handle ERROR.
+- No confidence fields or structured error envelope; plain strings/ToolError.
+- No built-in pagination or token hard-limit; wrapper must cap.
+- Cannot add new tools/language servers without forking.
+- Windows/HTTP issues; prefer stdio.
+
+### 5. Validation needed before adopting
+- Confirm Cursor MCP tool discoverability and stdio startup on Windows.
+- Test Dart LS on our Flutter repo.
+- Test Python Pyright for FastAPI.
+- Measure output sizes and timeout behavior.
+- Run `serena project index` on medium repo and measure first-tool latency.
+
+### 6. Decision
+- **Adopt** as precision layer. Use alongside `codebase-memory-mcp`. Wrap with our `team-workflow` MCP for output control and error mapping.

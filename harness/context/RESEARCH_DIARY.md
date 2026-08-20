@@ -105,9 +105,35 @@ We cloned and inspected `codebase-memory-mcp` source in Cursor. Major source-ver
 
 ---
 
+## 2026-08-20 — Source Inspection: Serena
+
+### Summary
+We cloned and inspected Serena source in Cursor. Major source-verified findings:
+
+- Serena is a Python MCP agent toolkit using SolidLSP to spawn language servers.
+- Python default LS is Pyright, not pylsp.
+- Dart LS auto-downloads Dart SDK; no Flutter-specific backend.
+- Tools return plain JSON strings/status; no confidence fields; no structured error envelope.
+- No built-in pagination or token hard-limit; outputs can be up to 150k chars, timeout 240s.
+- Language server lifecycle is fail-fast on init; crash retry once; tsserver crash detection.
+- Windows integration via stdio + `--context ide --project <abs path>` recommended.
+- Monorepo requires multiple language_servers in `.serena/project.yml`; no pnpm/Next/FastAPI special drivers.
+- MIT license confirmed; spawns separate LS binaries with their own licenses.
+
+### Decisions Influenced
+- Serena adopted as precision semantic editing layer alongside codebase-memory-mcp.
+- Wrapper MCP must cap/truncate Serena outputs, map ToolError/LS crashes to CTH ERROR/FAIL, and add our own confidence/metadata.
+- Flutter workflow remains Serena + Dart Analyzer + flutter analyze/test.
+- Use stdio MCP only on Windows.
+
+### Evidence Recorded
+- Source notes: `context/SERENA_SOURCE_NOTES.md`
+- Updated repo analysis: `docs/REPO_ANALYSIS.md`
+
+---
+
 ## Next Steps
-- Continue deep source inspection: Serena.
-- Then CodeGraph and other repo analyses.
+- Continue deep source inspection for CodeGraph and remaining target repos.
 - Proceed to Phase 0 tool validation.
 
 ---
@@ -118,4 +144,5 @@ We cloned and inspected `codebase-memory-mcp` source in Cursor. Major source-ver
 | 0.1 | 2026-08-20 | Human lead | Initial diary with Sprint 1 entry |
 | 0.2 | 2026-08-20 | Human lead | Added Sprint 2 entry |
 | 0.3 | 2026-08-20 | Human lead | Added Sprint 3 entry |
-| 0.4 | 2026-08-20 | Human lead | Added source inspection entry |
+| 0.4 | 2026-08-20 | Human lead | Added codebase-memory-mcp source inspection entry |
+| 0.5 | 2026-08-20 | Human lead | Added Serena source inspection entry |
