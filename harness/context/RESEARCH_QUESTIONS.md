@@ -11,7 +11,7 @@ This document tracks every unresolved question that must be answered with eviden
 ## Status Values
 - `open` — not yet researched.
 - `in-progress` — research started.
-- `answered` — resolved with evidence, recorded in `docs/CURSOR_ENFORCEMENT_RESEARCH.md` or `docs/RESEARCH.md`.
+- `answered` — resolved with evidence, recorded in `docs/CURSOR_ENFORCEMENT_RESEARCH.md`, `docs/CODE_INTELLIGENCE_RESEARCH.md`, or `docs/RESEARCH.md`.
 - `blocked` — cannot answer yet due to missing access or tooling.
 
 ---
@@ -63,19 +63,24 @@ This document tracks every unresolved question that must be answered with eviden
 ## C. Code Intelligence & Hybrid Design
 
 ### C1. Can `codebase-memory-mcp` be extended/wrapped to add GitNexus-style process tracing and confidence scores?
-- **Status:** open
+- **Status:** answered
+- **Evidence:** `docs/CODE_INTELLIGENCE_RESEARCH.md`
 
 ### C2. What are the exact Dart/Flutter limitations of `codebase-memory-mcp`?
-- **Status:** open
+- **Status:** answered
+- **Evidence:** `docs/CODE_INTELLIGENCE_RESEARCH.md`
 
 ### C3. How to handle monorepo multi-root indexing with `codebase-memory-mcp`?
-- **Status:** open
+- **Status:** answered
+- **Evidence:** `docs/CODE_INTELLIGENCE_RESEARCH.md`
 
 ### C4. What is the token cost of each graph query, and how do we cap outputs?
-- **Status:** open
+- **Status:** answered
+- **Evidence:** `docs/CODE_INTELLIGENCE_RESEARCH.md`
 
 ### C5. Do we need a separate “process tracing” layer, or can `codebase-memory-mcp` + our own aggregation suffice?
-- **Status:** open
+- **Status:** answered
+- **Evidence:** `docs/CODE_INTELLIGENCE_RESEARCH.md`
 
 ---
 
@@ -114,17 +119,18 @@ Initial target repos:
 - Use Perplexity Comet for targeted questions.
 - Read source repos directly where possible.
 - Run controlled experiments in Cursor for behavior validation.
-- Record all findings in `docs/REPO_ANALYSIS.md` and `context/RESEARCH_DIARY.md`.
+- Record all findings in research docs and `context/RESEARCH_DIARY.md`.
 - Update this document with status changes.
 
 ## Priority Order for Research
-1. Cursor enforcement/hooks (A1–A5, B1–B4) — COMPLETED.
-2. Code intelligence hybrid (C1–C5) — NEXT.
-3. Existing gates production readiness (D1–D3).
-4. Repo deep analysis (E) — ongoing as needed.
+1. Cursor enforcement/hooks — COMPLETED.
+2. Code intelligence hybrid — COMPLETED.
+3. Existing gates production readiness — NEXT.
+4. Repo deep analysis — ongoing as needed.
 
 ## Revision History
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 0.1 | 2026-08-20 | Human lead | Initial draft |
-| 0.2 | 2026-08-20 | Human lead | Marked A and B as answered after Sprint 1 |
+| 0.2 | 2026-08-20 | Human lead | Marked A and B answered after Sprint 1 |
+| 0.3 | 2026-08-20 | Human lead | Marked C answered after Sprint 2 |

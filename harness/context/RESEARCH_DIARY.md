@@ -32,9 +32,34 @@ We investigated Cursor's enforcement capabilities in depth using primary sources
 - Full consolidated findings: `docs/CURSOR_ENFORCEMENT_RESEARCH.md`
 - Research questions status updated: `context/RESEARCH_QUESTIONS.md`
 
-### Next Steps
-- Continue Research Sprint 2: Code Intelligence & Hybrid Design (questions C1–C5).
-- Deep repo analysis in `docs/REPO_ANALYSIS.md`.
+---
+
+## 2026-08-20 — Research Sprint 2: Code Intelligence & Hybrid Design
+
+### Summary
+We investigated `codebase-memory-mcp`, `Serena`, `GitNexus`, and token/output management. Key findings:
+
+- `codebase-memory-mcp` can be wrapped, not forked, to add GitNexus-style confidence and impact analysis.
+- Dart/Flutter limitations are significant; Serena/Dart LSP + Flutter toolchain required for semantic safety.
+- Monorepo root indexing works, but symlinks are skipped; validate pnpm and use `.cbmignore`.
+- Token outputs are small (200–3,000), but no built-in truncation; wrapper must cap and summarize.
+- Full process tracing is not required for v1; call-path + HTTP edge aggregation is enough.
+
+### Decisions Influenced
+- Hybrid code intelligence architecture confirmed.
+- Wrapper MCP will enrich `codebase-memory-mcp` outputs.
+- Flutter requires additional LSP/toolchain beyond graph engine.
+- Monorepo exclusions and token capping added to Phase 0 validation.
+
+### Evidence Recorded
+- Full consolidated findings: `docs/CODE_INTELLIGENCE_RESEARCH.md`
+- Research questions status updated: `context/RESEARCH_QUESTIONS.md`
+
+---
+
+## Next Steps
+- Continue Research Sprint 3: Existing Gates Production Readiness (questions D1–D3).
+- Begin deep repo analysis in `docs/REPO_ANALYSIS.md`.
 
 ---
 
@@ -42,3 +67,4 @@ We investigated Cursor's enforcement capabilities in depth using primary sources
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 0.1 | 2026-08-20 | Human lead | Initial diary with Sprint 1 entry |
+| 0.2 | 2026-08-20 | Human lead | Added Sprint 2 entry |
