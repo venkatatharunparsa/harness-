@@ -79,10 +79,36 @@ We investigated System Gate, Sentinel, and additional production-readiness gates
 
 ---
 
+## 2026-08-20 — Source Inspection: codebase-memory-mcp
+
+### Summary
+We cloned and inspected `codebase-memory-mcp` source in Cursor. Major source-verified corrections:
+
+- README node/edge catalog is incomplete; use `get_graph_schema`.
+- `detect_changes` has no confidence/risk; only `trace_path` supports risk labels.
+- No public library API; use as MCP binary + CLI.
+- Renames often trigger FULL rebuilds.
+- Watcher is git-poll only.
+- Flutter/Dart grammar-level only.
+- pnpm symlinks skipped.
+- Hybrid LSP is embedded, no external language servers.
+
+### Decisions Influenced
+- Wrapper MCP is mandatory for enrichment.
+- Flutter workflow requires Serena + Dart Analyzer.
+- Need explicit Windows integration handling.
+- `trace_path` with format:"json" is the correct tool name.
+
+### Evidence Recorded
+- Source notes: `context/CODEBASE_MEMORY_MCP_SOURCE_NOTES.md`
+- Updated repo analysis: `docs/REPO_ANALYSIS.md`
+
+---
+
 ## Next Steps
-- Begin deep repo analysis in `docs/REPO_ANALYSIS.md` for remaining repos.
-- Proceed to Phase 0 tool validation after repo analysis is sufficiently detailed.
-- Continue research on any open Cursor or pnpm-specific questions.
+- Continue deep source inspection: Serena.
+- Then CodeGraph and other repo analyses.
+- Proceed to Phase 0 tool validation.
 
 ---
 
@@ -92,3 +118,4 @@ We investigated System Gate, Sentinel, and additional production-readiness gates
 | 0.1 | 2026-08-20 | Human lead | Initial diary with Sprint 1 entry |
 | 0.2 | 2026-08-20 | Human lead | Added Sprint 2 entry |
 | 0.3 | 2026-08-20 | Human lead | Added Sprint 3 entry |
+| 0.4 | 2026-08-20 | Human lead | Added source inspection entry |
