@@ -1,6 +1,6 @@
 # Decision Log: Constellation Team Harness (CTH)
 
-**Version:** 0.1  
+**Version:** 0.2  
 **Status:** Draft for review  
 **Owner:** Human lead  
 **Date:** 2026-08-20
@@ -10,18 +10,24 @@ This document records all significant decisions made during the design and devel
 
 ## Format
 Each decision uses the following structure:
+D-XXX: Title
+Status: Proposed / Accepted / Rejected / Superseded
 
-```
-### D-XXX: Title
-- **Status:** Proposed / Accepted / Rejected / Superseded
-- **Date:** YYYY-MM-DD
-- **Context:** ...
-- **Options Considered:** ...
-- **Decision:** ...
-- **Rationale:** ...
-- **Consequences:** ...
-- **Approved by:** Human lead
-```
+Date: YYYY-MM-DD
+
+Context: ...
+
+Options Considered: ...
+
+Decision: ...
+
+Rationale: ...
+
+Consequences: ...
+
+Approved by: Human lead
+
+text
 
 ---
 
@@ -135,7 +141,63 @@ Each decision uses the following structure:
 
 ---
 
+## D-011: Adopt Serena as Core Precision Layer Earlier
+- **Status:** Accepted
+- **Date:** 2026-08-20
+- **Context:** Flutter/React Native and TypeScript work require LSP-grade exact symbol resolution. Deferring Serena too long would leave our precision layer missing.
+- **Options Considered:** Defer Serena indefinitely, add later only when refactoring, add as core from start.
+- **Decision:** Add Serena as a core component early, especially before mobile/frontend editing. Use it alongside `codebase-memory-mcp`.
+- **Rationale:** Serena provides the exact code context that is a core differentiator for CTH. Waiting reduces value and risks unsafe edits.
+- **Consequences:** More setup complexity, but earlier validation and safer edits.
+
+---
+
+## D-012: Add Architecture Boundary Tools to System Gate v2
+- **Status:** Accepted
+- **Date:** 2026-08-20
+- **Context:** Schema-based architecture gate is insufficient. Need deterministic fitness functions for module boundaries and circular dependencies.
+- **Options Considered:** Build custom architecture checks, use ArchUnit, use dependency-cruiser, use eslint-plugin-boundaries.
+- **Decision:** Adopt `dependency-cruiser` for repo-wide architecture boundary checks and `eslint-plugin-boundaries` for TypeScript/Next.js import rules.
+- **Rationale:** Both are deterministic, license-safe, and produce exit codes. They fill the gap without LLM judgment.
+- **Consequences:** Additional tooling in architecture phase; must be integrated into System Gate v2 fitness functions.
+
+---
+
+## D-013: Add Semgrep to Sentinel v2
+- **Status:** Accepted
+- **Date:** 2026-08-20
+- **Context:** opengrep may not cover all custom security rules for FastAPI/Node/Flutter. Semgrep is a proven, extensible static analysis engine.
+- **Options Considered:** Keep only opengrep, replace opengrep with Semgrep, use both.
+- **Decision:** Add Semgrep as an additional scanner in Sentinel v2, alongside opengrep. Use it for custom rules and broader language coverage.
+- **Rationale:** Defense in depth; Semgrep has a large rules ecosystem and supports custom patterns. Running both increases coverage without major overhead.
+- **Consequences:** More scanner runtime; must evaluate overlap and performance.
+
+---
+
+## D-014: Use pino/structlog, gray-matter, and chokidar as Implementation Libraries
+- **Status:** Accepted
+- **Date:** 2026-08-20
+- **Context:** Our team-workflow MCP needs structured logging, context parsing, and file watching.
+- **Options Considered:** Build custom logging/parsing/watching, use existing libraries.
+- **Decision:** Use `pino` or `structlog` for JSONL logging, `gray-matter` for YAML frontmatter parsing, and `chokidar` for file watching.
+- **Rationale:** These are mature, MIT-licensed, and reduce custom code risk.
+- **Consequences:** Adds dependencies to harness_ide; must keep them minimal.
+
+---
+
+## D-015: Hybrid Best-of-Breed Architecture
+- **Status:** Accepted
+- **Date:** 2026-08-20
+- **Context:** Multiple repositories each provide a specific strength. We need to combine them into a cohesive harness rather than depend on one.
+- **Options Considered:** Build on one complete agent harness, adopt many tools directly, extract patterns from all.
+- **Decision:** Adopt a hybrid architecture: direct deps for graph/security/context/logging, study patterns from OpenHands/DeepSeek/GitNexus/Temporal, and rebuild missing workflows ourselves.
+- **Rationale:** Gives best capabilities while respecting licenses and our requirements. Avoids vendor lock-in and monolith risk.
+- **Consequences:** More integration work, but a stronger and more maintainable system.
+
+---
+
 ## Revision History
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 0.1 | 2026-08-20 | Human lead | Initial decision log draft |
+| 0.2 | 2026-08-20 | Human lead | Added D-011 to D-015 hybrid architecture decisions |
