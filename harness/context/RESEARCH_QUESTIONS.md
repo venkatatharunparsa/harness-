@@ -11,7 +11,7 @@ This document tracks every unresolved question that must be answered with eviden
 ## Status Values
 - `open` — not yet researched.
 - `in-progress` — research started.
-- `answered` — resolved with evidence, recorded in `docs/CURSOR_ENFORCEMENT_RESEARCH.md`, `docs/CODE_INTELLIGENCE_RESEARCH.md`, or `docs/RESEARCH.md`.
+- `answered` — resolved with evidence, recorded in research docs.
 - `blocked` — cannot answer yet due to missing access or tooling.
 
 ---
@@ -87,13 +87,16 @@ This document tracks every unresolved question that must be answered with eviden
 ## D. Existing Gates Production Readiness
 
 ### D1. Is System Gate production-ready for our needs?
-- **Status:** open
+- **Status:** answered
+- **Evidence:** `docs/GATES_RESEARCH.md`
 
 ### D2. Is Sentinel production-ready for a commercial SaaS?
-- **Status:** open
+- **Status:** answered
+- **Evidence:** `docs/GATES_RESEARCH.md`
 
 ### D3. Do we need additional gates beyond System Gate and Sentinel (e.g., reliability, performance, observability)?
-- **Status:** open
+- **Status:** answered
+- **Evidence:** `docs/GATES_RESEARCH.md`
 
 ---
 
@@ -125,7 +128,7 @@ Initial target repos:
 ## Priority Order for Research
 1. Cursor enforcement/hooks — COMPLETED.
 2. Code intelligence hybrid — COMPLETED.
-3. Existing gates production readiness — NEXT.
+3. Existing gates production readiness — COMPLETED.
 4. Repo deep analysis — ongoing as needed.
 
 ## Revision History
@@ -134,3 +137,4 @@ Initial target repos:
 | 0.1 | 2026-08-20 | Human lead | Initial draft |
 | 0.2 | 2026-08-20 | Human lead | Marked A and B answered after Sprint 1 |
 | 0.3 | 2026-08-20 | Human lead | Marked C answered after Sprint 2 |
+| 0.4 | 2026-08-20 | Human lead | Marked D answered after Sprint 3 |

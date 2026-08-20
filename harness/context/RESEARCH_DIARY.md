@@ -57,9 +57,32 @@ We investigated `codebase-memory-mcp`, `Serena`, `GitNexus`, and token/output ma
 
 ---
 
+## 2026-08-20 — Research Sprint 3: Existing Gates Production Readiness
+
+### Summary
+We investigated System Gate, Sentinel, and additional production-readiness gates. Key findings:
+
+- System Gate is necessary but insufficient; needs fitness functions.
+- Sentinel covers core static scanning but misses supply chain, DAST, runtime, API authz, mobile, IaC, and secrets management.
+- Six additional gates needed: reliability, performance, observability, deployment, scalability, cost.
+- All gates must be deterministic, evidence-based, and exit-code driven.
+
+### Decisions Influenced
+- System Gate v2: schema + fitness functions.
+- Sentinel v2: stage-based security gates.
+- New production-gates layer for QA/Release phases.
+- All gates remain deterministic.
+
+### Evidence Recorded
+- Full consolidated findings: `docs/GATES_RESEARCH.md`
+- Research questions status updated: `context/RESEARCH_QUESTIONS.md`
+
+---
+
 ## Next Steps
-- Continue Research Sprint 3: Existing Gates Production Readiness (questions D1–D3).
-- Begin deep repo analysis in `docs/REPO_ANALYSIS.md`.
+- Begin deep repo analysis in `docs/REPO_ANALYSIS.md` for remaining repos.
+- Proceed to Phase 0 tool validation after repo analysis is sufficiently detailed.
+- Continue research on any open Cursor or pnpm-specific questions.
 
 ---
 
@@ -68,3 +91,4 @@ We investigated `codebase-memory-mcp`, `Serena`, `GitNexus`, and token/output ma
 |---------|------|--------|---------|
 | 0.1 | 2026-08-20 | Human lead | Initial diary with Sprint 1 entry |
 | 0.2 | 2026-08-20 | Human lead | Added Sprint 2 entry |
+| 0.3 | 2026-08-20 | Human lead | Added Sprint 3 entry |
